@@ -5,7 +5,11 @@
       "Bash(python manage.py:*)",
       "Bash(python:*)",
       "Bash(./venv/Scripts/pip install:*)",
-      "Bash(./venv/Scripts/python manage.py check:*)"
+      "Bash(./venv/Scripts/python manage.py check:*)",
+      "Bash(./venv/Scripts/python manage.py sync_news:*)",
+      "Bash(./venv/Scripts/python manage.py shell:*)",
+      "Bash(./venv/Scripts/python:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
