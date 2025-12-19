@@ -4,7 +4,8 @@
       "Bash(mkdir:*)",
       "Bash(python manage.py:*)",
       "Bash(python:*)",
-      "Bash(./venv/Scripts/pip install:*)"
+      "Bash(./venv/Scripts/pip install:*)",
+      "Bash(./venv/Scripts/python manage.py check:*)"
     ],
     "deny": [],
     "ask": []
