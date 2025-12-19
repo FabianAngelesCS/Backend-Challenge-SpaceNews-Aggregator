@@ -9,7 +9,9 @@
       "Bash(./venv/Scripts/python manage.py sync_news:*)",
       "Bash(./venv/Scripts/python manage.py shell:*)",
       "Bash(./venv/Scripts/python:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
