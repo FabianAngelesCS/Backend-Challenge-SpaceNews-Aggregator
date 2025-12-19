@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(python manage.py:*)",
+      "Bash(python:*)",
+      "Bash(./venv/Scripts/pip install:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
