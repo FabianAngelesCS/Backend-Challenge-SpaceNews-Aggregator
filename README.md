@@ -52,6 +52,17 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+**Nota para usuarios de Windows/SQLite:**
+
+Si obtienes un error con `psycopg2-binary`, puedes omitirlo ya que este proyecto usa SQLite por defecto:
+
+```bash
+# Instalar sin PostgreSQL
+pip install Django==4.2.7 djangorestframework==3.14.0 djangorestframework-simplejwt==5.3.0 requests==2.31.0 python-decouple==3.8
+```
+
+El paquete `psycopg2-binary` solo es necesario si planeas usar PostgreSQL en producción.
+
 ### 4. Configurar variables de entorno
 
 ```bash
