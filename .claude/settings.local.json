@@ -15,7 +15,8 @@
       "Bash(.venvScriptspip list)",
       "Bash(\".venv/Scripts/python.exe\" -m pip list)",
       "Bash(\".venv/Scripts/pip.exe\" install -r requirements.txt)",
-      "Bash(\".venv/Scripts/pip.exe\" install Django==4.2.7 djangorestframework==3.14.0 djangorestframework-simplejwt==5.3.0 requests==2.31.0 python-decouple==3.8)"
+      "Bash(\".venv/Scripts/pip.exe\" install Django==4.2.7 djangorestframework==3.14.0 djangorestframework-simplejwt==5.3.0 requests==2.31.0 python-decouple==3.8)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []
