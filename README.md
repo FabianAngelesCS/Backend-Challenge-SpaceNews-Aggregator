@@ -91,20 +91,16 @@ python manage.py sync_news --limit 50
 
 ### 8. Iniciar servidor
 ```bash
-# Puerto por defecto (8500)
-python manage.py runserver 8500
-
-# O puerto estándar (8000)
 python manage.py runserver
 ```
 
-Servidor disponible en: `http://127.0.0.1:8500`
+El servidor estará disponible en: `http://127.0.0.1:8000`
 
 ## 🔑 Credenciales de Prueba
 
 Después de crear el superusuario, tendrás acceso a:
 
-**Admin Panel:** `http://127.0.0.1:8500/admin/`
+**Admin Panel:** `http://127.0.0.1:8000/admin/`
 - Username: `admin`
 - Password: `admin123`
 
