@@ -55,19 +55,21 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**Nota:** Si obtienes error con `psycopg2-binary` en Windows:
-```bash
-pip install Django==4.2.7 djangorestframework==3.14.0 djangorestframework-simplejwt==5.3.0 requests==2.31.0 python-decouple==3.8
-```
+**Nota:** El proyecto usa SQLite para desarrollo, por lo que NO necesitas instalar `psycopg2-binary`. El archivo `requirements.txt` incluye `setuptools` para compatibilidad con Python 3.12+.
 
 ### 4. Configurar variables de entorno
-```bash
-# Copiar el archivo de ejemplo
-cp .env.example .env
 
-# El proyecto usa SQLite por defecto, no necesitas modificar nada
-# Para producción, configura PostgreSQL en .env
+**Windows (PowerShell/CMD):**
+```bash
+copy .env.example .env
 ```
+
+**Linux/Mac:**
+```bash
+cp .env.example .env
+```
+
+El proyecto usa SQLite por defecto, no necesitas modificar nada en el `.env` para desarrollo. Para producción con PostgreSQL, configura las variables correspondientes en `.env`.
 
 ### 5. Ejecutar migraciones
 ```bash
@@ -233,6 +235,38 @@ Authorization: Bearer {access_token}
 - Filtrado en QuerySet: `filter(user=request.user)`
 - Optimizado con `select_related('article')`
 
+### Ejemplos Prácticos con curl
+
+**1. Obtener Token JWT:**
+```bash
+curl -X POST http://127.0.0.1:8000/api/token/ \
+  -H "Content-Type: application/json" \
+  -d "{\"username\": \"admin\", \"password\": \"admin123\"}"
+```
+
+**2. Consultar Reportes Mensuales (público):**
+```bash
+curl http://127.0.0.1:8000/api/reports/monthly/
+```
+
+**3. Listar Favoritos (requiere token):**
+```bash
+curl http://127.0.0.1:8000/api/favorites/ \
+  -H "Authorization: Bearer {tu_token_access}"
+```
+
+**4. Marcar Artículo como Favorito:**
+```bash
+curl -X POST http://127.0.0.1:8000/api/articles/1/favorite/ \
+  -H "Authorization: Bearer {tu_token_access}"
+```
+
+**5. Verificar Duplicados:**
+```bash
+# Ejecutar el comando del paso 4 nuevamente
+# Respuesta: {"message": "El artículo ya está en tus favoritos", "article_id": 1}
+```
+
 ## 🛠️ Management Commands
 
 ### Sincronizar Noticias
@@ -279,6 +313,50 @@ Total procesados:  50
 ============================================================
 ¡Sincronización exitosa! Se guardaron 49 artículos.
 ```
+
+## ⚠️ Solución de Problemas
+
+### Error: `ModuleNotFoundError: No module named 'pkg_resources'`
+
+**Problema:** Al ejecutar `python manage.py migrate` obtienes este error.
+
+**Causa:** Python 3.12+ no incluye `setuptools` por defecto en entornos virtuales.
+
+**Solución:**
+```bash
+pip install setuptools
+```
+
+Este paquete ya está incluido en `requirements.txt`, pero si instalaste las dependencias antes de agregarlo, ejecútalo manualmente.
+
+### Error con `psycopg2-binary` en Windows
+
+**Problema:** Error de instalación de `psycopg2-binary`.
+
+**Causa:** Este paquete solo es necesario para PostgreSQL en producción, no para desarrollo.
+
+**Solución:** El proyecto ya NO incluye `psycopg2-binary` en `requirements.txt` para desarrollo. Si usas PostgreSQL en producción, instálalo manualmente:
+```bash
+pip install psycopg2-binary
+```
+
+### El servidor no inicia
+
+**Problema:** `python manage.py runserver` falla.
+
+**Verificaciones:**
+1. Asegúrate de tener el entorno virtual activado
+2. Verifica que las migraciones se ejecutaron: `python manage.py migrate`
+3. Revisa que el archivo `.env` existe (cópialo desde `.env.example`)
+
+### Los tests fallan
+
+**Problema:** `python manage.py test` muestra errores.
+
+**Verificaciones:**
+1. Asegúrate de tener todas las dependencias: `pip install -r requirements.txt`
+2. Ejecuta las migraciones: `python manage.py migrate`
+3. Verifica que no haya cambios sin aplicar en los modelos
 
 ## 🧪 Testing
 
